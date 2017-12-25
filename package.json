@@ -1,0 +1,43 @@
+{
+  "name": "gratitude",
+  "version": "1.0.0",
+  "description": "A cli for daily gratitude practice",
+  "main": "bin/index.js",
+  "scripts": {
+    "test": "jest",
+    "watch": "jest --watch",
+    "prettier": "prettier --no-semi --single-quote --write './**/*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hobochild/gratitude.git"
+  },
+  "keywords": [
+    "grateful",
+    "gratitude",
+    "practice",
+    "mindfulness",
+    "cli"
+  ],
+  "author": "hobochild",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hobochild/gratitude/issues"
+  },
+  "homepage": "https://github.com/hobochild/gratitude#readme",
+  "jest": {
+"watchPathIgnorePatterns": ["<rootDir>/__mocks__/db.json"]
+  },
+  "devDependencies": {
+    "eslint": "^4.13.1",
+    "eslint-config-prettier": "^2.9.0",
+    "jest": "^21.2.1",
+    "prettier": "^1.9.2"
+  },
+  "dependencies": {
+    "fs-jetpack": "^1.2.0",
+    "inquirer": "^4.0.1",
+    "lodash": "^4.17.4",
+    "moment": "^2.20.1"
+  }
+}
