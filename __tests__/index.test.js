@@ -1,6 +1,7 @@
 const { ask, save, getCurrentStreak, ensureDB } = require('../index')
 const moment = require('moment')
 const path = require('path')
+const fs = require('fs-jetpack')
 const DB_PATH = path.resolve('./__mocks__/db.json')
 const ANSWERS = ['soda pop', '$$$', 'toffee', 'mustaches']
 
@@ -22,6 +23,10 @@ const generateUserInput = ui => answer => {
 
 beforeEach(done => {
   ensureDB(DB_PATH).then(done)
+})
+
+afterEach(done => {
+  fs.removeAsync(DB_PATH).then(done)
 })
 
 test('should accept n number prompts', done => {
@@ -66,5 +71,5 @@ test('should save output to db', done => {
 test('should keep track of n days of latest streak', () => {
   const db = require('../__mocks__/dummy_db.json')
   const streak = getCurrentStreak(db, '20171228')
-  expect(streak).toEqual(5)
+  expect(streak).toEqual(4)
 })

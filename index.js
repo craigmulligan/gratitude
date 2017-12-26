@@ -38,9 +38,7 @@ const getCurrentStreak = (db = {}, now) => {
   const latest = now || getLatestDate(keys)
   let streak = 1
   let prev = getPrevious(db, latest)
-  if (prev) {
-    streak++
-  }
+
   while (prev) {
     streak++
     prev = getPrevious(db, prev)
