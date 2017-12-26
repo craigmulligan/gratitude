@@ -54,7 +54,7 @@ test('should create db file if not found', done => {
 
 test('should save output to db', done => {
   const answers = generateAnswers(2)
-  save(DB_PATH)(answers).then((db) => {
+  save(DB_PATH)(answers).then(db => {
     const today = moment().format('YYYYMMDD')
     expect(db).toEqual({
       [today]: answers

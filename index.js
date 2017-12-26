@@ -19,7 +19,7 @@ const save = db_path => answers => {
   const db = require(db_path)
   const today = moment().format('YYYYMMDD')
   db[today] = answers
-  return fs.writeAsync(db_path, JSON.stringify(db)).then(() => (db))
+  return fs.writeAsync(db_path, JSON.stringify(db)).then(() => db)
 }
 
 const getPrevious = (db, date) => {
