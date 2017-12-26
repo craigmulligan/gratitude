@@ -1,9 +1,8 @@
 #!/usr/bin/env node
-const { ask, ensureDB, getCurrentStreak, save } = require('../index.js');
-const DEFAULT_DB_PATH = `${process.env.HOME}/.gratitude/db.json`;
-const argv = require('yargs').argv;
-
-(async () => {
+const { ask, ensureDB, getCurrentStreak, save } = require('../index.js')
+const DEFAULT_DB_PATH = `${process.env.HOME}/.gratitude/db.json`
+const argv = require('yargs').argv
+;(async () => {
   try {
     // eslint-disable-next-line no-console
     console.log('Take a moment to be grateful')
@@ -14,7 +13,7 @@ const argv = require('yargs').argv;
     const streak = getCurrentStreak(db)
     // eslint-disable-next-line no-console
     console.log(`current 🙏 streak: ${streak}!`)
-  } catch(err) {
+  } catch (err) {
     // eslint-disable-next-line no-console
     console.log(err)
   }
