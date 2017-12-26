@@ -46,7 +46,6 @@
     "inquirer": "^4.0.1",
     "lodash": "^4.17.4",
     "moment": "^2.20.1",
-    "semantic-release-cli": "^3.3.0",
     "yargs": "^10.0.3"
   }
 }
