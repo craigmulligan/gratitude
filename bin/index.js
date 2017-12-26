@@ -8,7 +8,6 @@ const {
 } = require('../index.js')
 const DEFAULT_DB_PATH = `${process.env.HOME}/.gratitude/db.json`
 const argv = require('yargs').argv
-
 ;(async () => {
   try {
     const dbPath = argv.db || DEFAULT_DB_PATH
