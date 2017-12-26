@@ -3,6 +3,7 @@ const _ = require('lodash')
 const Rx = require('rx-lite-aggregates')
 const fs = require('fs-jetpack')
 const moment = require('moment')
+const DATE_FORMAT = 'YYYYMMDD'
 
 const q = i => ({
   type: 'input',
@@ -15,9 +16,9 @@ const ask = n => {
   return inquirer.prompt(observable)
 }
 
-const save = db_path => answers => {
-  const db = require(db_path)
-  const today = moment().format('YYYYMMDD')
+const save = (db_path, database) => answers => {
+  const db = database || require(db_path)
+  const today = moment().format(DATE_FORMAT)
   db[today] = answers
   return fs.writeAsync(db_path, JSON.stringify(db)).then(() => db)
 }
@@ -25,7 +26,7 @@ const save = db_path => answers => {
 const getPrevious = (db, date) => {
   const previous = moment(date)
     .subtract(1, 'days')
-    .format('YYYYMMDD')
+    .format(DATE_FORMAT)
   return db[previous] ? previous : null
 }
 
@@ -58,9 +59,14 @@ const ensureDB = path => {
   }
 }
 
+const doneToday = db => {
+  return db[moment().format(DATE_FORMAT)] ? true : false
+}
+
 module.exports = {
   ask,
   save,
   getCurrentStreak,
-  ensureDB
+  ensureDB,
+  doneToday
 }
