@@ -9,7 +9,7 @@
 npm i -g gratitude
 ```
 
-Add it to `~/.bashrc` || `~/.zshrc`
+Add it to `~/.bashrc` or `~/.zshrc`
 
 ```bash
 gratitude
