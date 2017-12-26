@@ -1,8 +1,6 @@
 const inquirer = require('inquirer')
 const _ = require('lodash')
 const Rx = require('rx-lite-aggregates')
-const DB_PATH = process.env.GRATITUDE_DB_PATH
-const db = require(DB_PATH)
 const fs = require('fs-jetpack')
 const moment = require('moment')
 
@@ -17,13 +15,54 @@ const ask = n => {
   return inquirer.prompt(observable)
 }
 
-const save = answers => {
-  const today = moment().format('YYYYMMDD');
-  db[today] = answers 
-  return fs.writeAsync(DB_PATH, JSON.stringify(db))
+const save = db_path => answers => {
+  const db = require(db_path)
+  const today = moment().format('YYYYMMDD')
+  db[today] = answers
+  return fs.writeAsync(db_path, JSON.stringify(db)).then(() => (db))
+}
+
+const getPrevious = (db, date) => {
+  const previous = moment(date)
+    .subtract(1, 'days')
+    .format('YYYYMMDD')
+  return db[previous] ? previous : null
+}
+
+const getLatestDate = keys => {
+  return keys.sort().reverse()[0]
+}
+
+const getCurrentStreak = (db = {}, now) => {
+  const keys = Object.keys(db)
+  const latest = now || getLatestDate(keys)
+  let streak = 1
+  let prev = getPrevious(db, latest)
+  if (prev) {
+    streak++
+  }
+  while (prev) {
+    streak++
+    prev = getPrevious(db, prev)
+  }
+  return streak
+}
+
+const ensureDB = path => {
+  try {
+    require(path)
+    return Promise.resolve()
+  } catch (err) {
+    if (err) {
+      return fs.writeAsync(path, JSON.stringify({}))
+    }
+    return Promise.reject(err)
+  }
 }
 
 module.exports = {
   ask,
-  save
+  save,
+  getCurrentStreak,
+  ensureDB
 }
