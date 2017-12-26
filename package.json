@@ -2,7 +2,10 @@
   "name": "gratitude",
   "version": "0.0.0-development",
   "description": "A cli for daily gratitude practice",
-  "main": "bin/index.js",
+  "main": "./bin/index.js",
+  "bin": {
+    "gratitude": "./bin/index.js"
+  },
   "scripts": {
     "test": "jest",
     "watch": "jest --watch",
