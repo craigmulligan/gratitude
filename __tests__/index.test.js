@@ -49,7 +49,7 @@ test('should accept n number prompts', done => {
 })
 
 test('should create db file if not found', done => {
-  const p = path.resolve('../__mock__/db-ensure.json')
+  const p = path.resolve('./__mocks__/db-ensure.json')
   ensureDB(p)
     .then(() => {
       require(p)
